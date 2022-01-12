@@ -1,0 +1,72 @@
+{% extends 'body.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<br>
+<form action="." method="post">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3>
+                <i class="fas fa-plus"></i>
+                {{title}}
+            </h3>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <input type="hidden" name="action" id="" value="{{ action }}">
+        </div>
+
+        
+            {% for field in form.visible_fields %}
+                <label for="email">{{ field.label }}</label>
+                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+            {% endfor %}
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-flat btnTest">
+                <i class="fas fa-save"></i>&nbsp; Nuevo registro
+            </button>
+        </div>
+        </div>
+    </div>
+</form>
+<script>
+    {% if form.errors %}
+        var errors = '';
+        {% for field in form %}
+            {% for error in field.errors %}
+                errors = '{{ error }}\n'
+            {% endfor %}
+        {% endfor %}
+
+        Swal.fire({
+            title: 'Error!',
+            text: errors,
+            icon: 'error',
+            confirmButtonText: 'Cool'
+        })
+    {% endif %}
+
+    $('form').on('submit', function(e){
+        e.preventDefault();
+        var paramaters = $(this).serializeArray();
+        //console.log(paramaters)
+        $.ajax({
+            url: '{% url 'categoryCreate' %}',
+            type: 'POST',
+            data: paramaters,
+            dataType: 'json',
+        }).done(function (data){
+            if(!data.hasOwnProperty('error')){
+                Location.href = '{{ list_url }}';
+                return false;
+            }
+
+        message_error(data.error);
+
+        }).fail(function (jqXHR, textStatus, errorThrown){
+            alert(textStatus + ': ' + errorThrown);
+        })
+    })
+</script>
+
+{% endblock %}
