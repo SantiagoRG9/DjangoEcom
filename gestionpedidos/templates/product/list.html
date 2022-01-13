@@ -1,0 +1,28 @@
+{% extends 'list.html' %}
+
+{% block columns %}
+    <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Pvp</th>
+        <th scope="col">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+    {% for c in object_list %}
+    <tr>
+        <td>{{c.id}}</td>
+        <td>{{c.name}}</td>
+        <td>{{c.cate}}</td>
+        <td>{{c.image}}</td>
+        <td>{{c.pvp}}</td>
+        <td>
+            <a href="{% url 'productUpdate' c.id %}" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>
+            <a href="{% url 'productDelete' c.id %}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
+        </td>
+    </tr>
+    {% endfor %}
+{% endblock %}

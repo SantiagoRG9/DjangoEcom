@@ -4,3 +4,26 @@ function message_error(obj) {
         console.log(value);
     });
 }
+
+function submit_with_ajax(url, paramaters, callback) {
+    $.confirm({
+        confirmButton: 'Yes i agree',
+        cancelButton: 'NO never !'
+    });
+    $.ajax({
+        url: url, //window.location.pathname
+        type: 'POST',
+        data: paramaters,
+        dataType: 'json',
+    }).done(function (data){
+        if(!data.hasOwnProperty('error')){
+            callback();
+            return false;
+        }
+
+    message_error(data.error);
+
+    }).fail(function (jqXHR, textStatus, errorThrown){
+        alert(textStatus + ': ' + errorThrown);
+    })
+}

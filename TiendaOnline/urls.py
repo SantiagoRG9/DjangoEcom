@@ -17,21 +17,39 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gestionpedidos.views.category.views import *
+from gestionpedidos.views.product.views import *
 from homepages.views import *
 from login.views import *
+from gestionpedidos.views.dashboard.views import DashboardView
 
 urlpatterns = [
+
+    # CATEGORY
     path('admin/', admin.site.urls),
     path('erp/', CategoryListView.as_view(), name='categoryList'),
     path('erp2/', CategoryCreateView.as_view(), name='categoryCreate'),
     path('erp3/<int:pk>', CategoryUpdateView.as_view(), name='categoryUpdate'),
     path('erp4/<int:pk>', CategoryDeleteView.as_view(), name='categoryDelete'),
-    path('form/', CategoryFormView.as_view(), name='categoryForm'),
+    path('formcate/', CategoryFormView.as_view(), name='categoryForm'),
+
+    # PRODUCT
+    path('prod/', ProductListView.as_view(), name='productList'),
+    path('prod2/', ProductCreateView.as_view(), name='productCreate'),
+    path('prod3/<int:pk>', ProductUpdateView.as_view(), name='productUpdate'),
+    path('prod4/<int:pk>', ProductDeleteView.as_view(), name='productDelete'),
+    path('formprod/', ProductFormView.as_view(), name='productForm'),
+
+
+
+
 
     # HOMEPAGES
-    path('', IndexView.as_view()),
+    path('', IndexView.as_view(), name='homepage'),
 
     #LOGIN
-    path('login/', LoginFormView.as_view()),
+    path('login/', include('login.url')),
+
+    # DASHBOARD
+    path('dash', DashboardView.as_view(), name='dashboard'),
 
 ]

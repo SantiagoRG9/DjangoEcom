@@ -9,6 +9,7 @@ from django.views.generic.edit import FormView
 from gestionpedidos.models import Category
 from gestionpedidos.forms import CategoryForm
 from django.urls import *
+from django.contrib.auth.decorators import login_required
 
 def category_list(request):
     data = {
@@ -22,8 +23,10 @@ class CategoryListView(ListView):
 
     model = Category
     template_name = 'category/list.html'
+    success_url = reverse_lazy('categoryList')
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 

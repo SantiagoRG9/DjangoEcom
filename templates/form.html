@@ -17,7 +17,7 @@
 
         
             {% for field in form.visible_fields %}
-                <label for="email">{{ field.label }}</label>
+                <label for="">{{ field.label }}</label>
                 {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
             {% endfor %}
         </div>
@@ -25,6 +25,7 @@
             <button type="submit" class="btn btn-primary btn-flat btnTest">
                 <i class="fas fa-save"></i>&nbsp; Nuevo registro
             </button>
+            
         </div>
         </div>
     </div>
@@ -50,6 +51,11 @@
         e.preventDefault();
         var paramaters = $(this).serializeArray();
         //console.log(paramaters)
+
+        submit_with_ajax(window.location.pathname, paramaters, function name(params) {
+            Location.href = '{{ list_url }}';
+        })
+
         $.ajax({
             url: '{% url 'categoryCreate' %}',
             type: 'POST',
@@ -67,6 +73,8 @@
             alert(textStatus + ': ' + errorThrown);
         })
     })
+
+   
 </script>
 
 {% endblock %}

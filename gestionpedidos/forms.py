@@ -1,5 +1,6 @@
 from django.forms import *
 from gestionpedidos.models import Category
+from gestionpedidos.models import Product
 
 class CategoryForm(ModelForm):
     
@@ -14,10 +15,39 @@ class CategoryForm(ModelForm):
         fields = '__all__'
 
         widgets = {
-            'desc': Textarea(
+            'nombre': Textarea(
                 attrs={
                  'rows' : 3,
                  'cols' : 3
                 }
             )
         }
+
+
+class ProductForm(ModelForm):
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+        widgets = {
+            'name': TextInput(
+                attrs={
+                 'placeholder' : 'Ingrese nombre'
+                }
+            )
+        }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+            
+        return data
