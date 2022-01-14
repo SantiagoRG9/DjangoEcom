@@ -70,17 +70,14 @@ class CategoryCreateView(CreateView):
         data = {}
         try:
             action = request.POST['action']
-            if action == 'add':
+            if action == 'add':   
                 form = self.get_form()
-                if form.is_valid():
-                    form.save()
-                else:
-                    data['error'] = form.errors
+                form.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opcion'
         except Exception as e:
             data['error'] = str(e)
-        return JsonResponse(data)
+        return redirect('categoryList')
       
        
         # cat = Category.objects.get(pk=request.POST['id'])
@@ -118,21 +115,6 @@ class CategoryDeleteView(DeleteView):
     model = Category
     template_name = "category/delete.html"
     success_url = reverse_lazy('categoryList')
-
-    # @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        self.object = self.get_object
-        return super().dispatch(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try: 
-            self.get_object
-        except Exception as e:
-            data['error'] = str(e)
-
-        return JsonResponse(data)
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

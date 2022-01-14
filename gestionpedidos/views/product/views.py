@@ -62,17 +62,14 @@ class ProductCreateView(CreateView):
         data = {}
         try:
             action = request.POST['action']
-            if action == 'add':
+            if action == 'add':   
                 form = self.get_form()
-                if form.is_valid():
-                    form.save()
-                else:
-                    data['error'] = form.errors
+                form.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opcion'
         except Exception as e:
             data['error'] = str(e)
-        return JsonResponse(data)
+        return redirect('productList')
       
        
         # cat = Product.objects.get(pk=request.POST['id'])

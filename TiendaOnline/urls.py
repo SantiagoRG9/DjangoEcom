@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from gestionpedidos.views.category.views import *
 from gestionpedidos.views.product.views import *
+from gestionpedidos.views.test.view import TestView
 from homepages.views import *
 from login.views import *
 from gestionpedidos.views.dashboard.views import DashboardView
+from django.conf import settings
+from django.conf.urls.static import static 
 
 urlpatterns = [
 
@@ -40,9 +43,6 @@ urlpatterns = [
     path('formprod/', ProductFormView.as_view(), name='productForm'),
 
 
-
-
-
     # HOMEPAGES
     path('', IndexView.as_view(), name='homepage'),
 
@@ -52,4 +52,8 @@ urlpatterns = [
     # DASHBOARD
     path('dash', DashboardView.as_view(), name='dashboard'),
 
+    # TEST
+    path('test/', TestView.as_view(), name='test'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

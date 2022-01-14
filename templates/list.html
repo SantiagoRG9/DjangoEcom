@@ -45,20 +45,7 @@
                 responsive: true,
                 autoWidth: false
             });
-            $('.btnTest').on('click', function () {
-                $.ajax({
-                    url: '{% url 'categoryList' %}',
-                    type: 'POST',
-                    data: {id: 7},
-                    dataType: 'json',
-                }).done(function (data){
-                    console.log(data)
-                }).fail(function (data){
-                    alert("error");
-                })
-            });
         });
-
     </script>
 {% endblock javascript %}
 

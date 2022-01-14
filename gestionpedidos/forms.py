@@ -1,6 +1,6 @@
 from django.forms import *
 from gestionpedidos.models import Category
-from gestionpedidos.models import Product
+from gestionpedidos.models import Product, Client
 
 class CategoryForm(ModelForm):
     
@@ -51,3 +51,24 @@ class ProductForm(ModelForm):
             data['error'] = str(e)
             
         return data
+
+
+class TestForm(Form):
+    categories = ModelChoiceField(queryset=Category.objects.all(), widget=Select(attrs={
+        'class' : 'form-control select2'
+    }))
+
+    products = ModelChoiceField(queryset=Product.objects.none(), widget=Select(attrs={
+    'class' : 'form-control select2'
+    }))
+
+
+class ClientForm(ModelForm):
+    class Meta:
+        model = Client
+        fields = '__all__'
+        widgets = {
+            'names' : TextInput(
+                attrs=
+            )
+        }

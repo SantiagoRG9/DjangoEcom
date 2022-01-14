@@ -1,7 +1,11 @@
+from curses import savetty
 from django.db import models
 from datetime import datetime
 from django.db.models.deletion import CASCADE
 from django.forms import model_to_dict
+from models import BaseModel
+
+# from crum import get_current_user
 
 class Type(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
@@ -9,12 +13,20 @@ class Type(models.Model):
     def __str__(self):
         return self.names
 
-class Category(models.Model):
+class Category(BaseModel):
     names = models.CharField(max_length=150, verbose_name='Nombres', unique=True)
     desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
 
     def __str__(self):
         return self.names
+
+    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    #     user = get_current_user()
+    #     if user and not user.pk:
+    #         user = None
+    #     if not self.pk:
+    #         self.created_by = user
+    #     super(Category, self).save()
 
     def toJSON(self):
         item = model_to_dict(self)
@@ -55,9 +67,14 @@ class Client(models.Model):
     dni = models.CharField(max_length=10, unique=True, verbose_name='Dni')
     birthday = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
     address = models.CharField(max_length=150, null=True, blank=True, verbose_name='Direccion')
+    # gender = models.CharField(max_length=10, choices=gender_choices, blank=True, verbose_name='Direccion')
 
     def __str__(self):
         return self.names
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
 
 
 class Sale(models.Model):
