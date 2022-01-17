@@ -1,5 +1,4 @@
 from os import name
-# from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
@@ -103,33 +102,40 @@ class ProductUpdateView(UpdateView):
         return context
 
 
-class ProductDeleteView(DeleteView):
-    model = Product
-    template_name = "product/delete.html"
-    success_url = reverse_lazy('productList')
+# class ProductDeleteView(DeleteView):
+#     model = Product
+#     template_name = "product/delete.html"
+#     success_url = reverse_lazy('productList')
 
-    # @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        self.object = self.get_object
-        return super().dispatch(request, *args, **kwargs)
+#     # @method_decorator(csrf_exempt)
+#     def dispatch(self, request, *args, **kwargs):
+#         self.object = self.get_object
+#         return super().dispatch(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try: 
-            self.get_object
-        except Exception as e:
-            data['error'] = str(e)
+#     def post(self, request, *args, **kwargs):
+#         data = {}
+#         try: 
+#             self.get_object
+#         except Exception as e:
+#             data['error'] = str(e)
 
-        return JsonResponse(data)
+#         return JsonResponse(data)
 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminacion de un producto'
-        context['list_url'] = reverse_lazy('productList')
-        context['entity'] = 'Productos'
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = 'Eliminacion de un producto'
+#         context['list_url'] = reverse_lazy('productList')
+#         context['entity'] = 'Productos'
 
-        return context
+#         return context
+
+def DeleteProduct(request, id):
+    pro = Product.objects.get(pk=id)
+    pro.delete()
+    produ = Product.objects.all()
+    return render(request, 'productList',)
+
 
 
 class ProductFormView(FormView):

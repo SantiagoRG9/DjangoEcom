@@ -18,12 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from gestionpedidos.views.category.views import *
 from gestionpedidos.views.product.views import *
+from gestionpedidos.views.client.views import *
+from gestionpedidos.views.sale.views import *
 from gestionpedidos.views.test.view import TestView
 from homepages.views import *
 from login.views import *
 from gestionpedidos.views.dashboard.views import DashboardView
 from django.conf import settings
 from django.conf.urls.static import static 
+
 
 urlpatterns = [
 
@@ -39,9 +42,22 @@ urlpatterns = [
     path('prod/', ProductListView.as_view(), name='productList'),
     path('prod2/', ProductCreateView.as_view(), name='productCreate'),
     path('prod3/<int:pk>', ProductUpdateView.as_view(), name='productUpdate'),
-    path('prod4/<int:pk>', ProductDeleteView.as_view(), name='productDelete'),
+    path('prod4/<int:pk>', DeleteProduct, name='productDelete'),
     path('formprod/', ProductFormView.as_view(), name='productForm'),
 
+    # CLIENT
+    path('cli/', ClientListView.as_view(), name='clientList'),
+    path('cli2/', ClientCreateView.as_view(), name='clientCreate'),
+    path('cli3/<int:pk>', ClientUpdateView.as_view(), name='clientUpdate'),
+    path('cli4/<int:pk>', ClientDeleteView.as_view(), name='clientDelete'),
+    path('formcli/', ClientFormView.as_view(), name='clientForm'),
+
+    # SALE
+    # path('sale/', SaleListView.as_view(), name='saleList'),
+    path('sale2/', SaleCreateView.as_view(), name='saleCreate'),
+    # path('sale3/<int:pk>', SaleUpdateView.as_view(), name='saleUpdate'),
+    # path('sale4/<int:pk>', SaleDeleteView.as_view(), name='saleDelete'),
+    # path('formsale/', SaleFormView.as_view(), name='clientsale'),
 
     # HOMEPAGES
     path('', IndexView.as_view(), name='homepage'),

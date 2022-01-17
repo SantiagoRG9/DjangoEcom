@@ -29,13 +29,16 @@
         </table>
         <div>
         <div class="card-footer">
-            <a href="{{ create_url }}" class="btn btn-primary btn-flat btnTest">
-                <i class="fas fa-plus"></i>&nbsp; Nuevo registro
-            </a>
+            {% block button_list %}
+                <a href="{{ create_url }}" class="btn btn-primary btn-flat btnTest">
+                    <i class="fas fa-plus"></i>&nbsp; Nuevo registro
+                </a>
+            {% endblock button_list %}
         </div>
         </div>
     </div>
     <br><br>
+
 {% endblock %}
 
 {% block javascript %}
@@ -46,6 +49,13 @@
                 autoWidth: false
             });
         });
+        
+        // $('form').on('submit', function (e){
+        //     e.preventDefault();
+    
+        //     var parameters = new FormData(this);
+        //     submit_with_ajax(window.location.pathname,'notificacion','¿Esta seguro?',location.reload())
+        // })
     </script>
 {% endblock javascript %}
 

@@ -6,6 +6,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from gestionpedidos.mixin import IsSuperuserMixin
 from gestionpedidos.models import Category
 from gestionpedidos.forms import CategoryForm
 from django.urls import *
@@ -19,8 +21,8 @@ def category_list(request):
     return render(request, 'category/list.html', data)
 
 
-class CategoryListView(ListView):
-
+class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'gestionpedidos.view_category'
     model = Category
     template_name = 'category/list.html'
     success_url = reverse_lazy('categoryList')
@@ -29,6 +31,8 @@ class CategoryListView(ListView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+        
 
     # def dispatch(self, request, *args, **kwargs):
     #     if request.method == 'GET':

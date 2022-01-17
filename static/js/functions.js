@@ -14,7 +14,7 @@ function submit_with_ajax(url, paramaters, callback) {
         url: url, //window.location.pathname
         type: 'POST',
         data: paramaters,
-        dataType: 'text',
+        dataType: 'json',
         processData: false,
         contentType: false,
     }).done(function (data){
@@ -29,3 +29,10 @@ function submit_with_ajax(url, paramaters, callback) {
         alert(textStatus + ': ' + errorThrown);
     })
 }
+
+$(document).ready( function () {
+   
+    $('input[name="action"]').val('add')
+    $('#myClientModal').modal('show');
+    
+})
