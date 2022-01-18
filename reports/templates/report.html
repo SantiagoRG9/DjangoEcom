@@ -1,0 +1,34 @@
+{% extends 'list.html' %}
+
+{% block content %}
+<br>
+    <div class="card card-default">
+        <div class="card-header">
+            <h3>
+                <i class="fas fa-chart-bar"></i>
+                <span>{{title}}</span>
+            </h3>
+        </div>
+        <br>
+        <table class="table" id="myTable">
+            <thead>
+                {% block columns %}
+                {% endblock columns %}
+            </thead>
+            <tbody>
+                {% block rows %}
+                {% endblock rows %}
+            </tbody>
+        </table>
+        <div>
+        <div class="card-footer">
+            {% block button_list %}
+                <a href="{{ create_url }}" class="btn btn-primary btn-flat btnTest">
+                    <i class="fas fa-plus"></i>&nbsp; Nuevo registro
+                </a>
+            {% endblock button_list %}
+        </div>
+        </div>
+    </div>
+    <br><br>
+{% endblock content %}

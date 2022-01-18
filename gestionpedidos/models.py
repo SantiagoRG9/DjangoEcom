@@ -59,6 +59,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['cat'] = self.cat.toJSON()
+        item['image'] = self.get_image()
+        item['pvp'] = format(self.pvp, '.2f')
+        return item
+
 
 
 class Client(models.Model):
@@ -72,10 +79,6 @@ class Client(models.Model):
     def __str__(self):
         return self.names
 
-    def toJSON(self):
-        item = model_to_dict(self)
-        return item
-
 
 class Sale(models.Model):
     cli = models.ForeignKey(Client, on_delete=models.CASCADE)
@@ -86,6 +89,10 @@ class Sale(models.Model):
 
     def __str__(self):
         return self.cli.names
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
 
 class DetSale(models.Model):
     sale = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)

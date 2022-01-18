@@ -15,15 +15,16 @@
               <h3 class="card-title"> <i class="fas fa-boxes"></i> Detalle de productos</h3>
             </div>
         </div>
+        <div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card-body">
                         <div class="for-group">
-                            <label for="">Buscardor de productos:</label>
+                            <!-- <label for="">Buscador de productos:</label> -->
                             <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" placeholder="Ingrese una descripcion de producto">
+                                <!-- <input type="text" name="search" class="form-control" placeholder="Ingrese una descripcion de producto"> -->
                                 <span class="input-group-append">
-                                <button type="button" class="btn btn-danger btn-flat"><i class="fas fa-times"></i></button>
+                                <!-- <button type="button" class="btn btn-danger btn-flat"><i class="fas fa-times"></i></button> -->
                                 </span>
                             </div>
                             <hr>
@@ -39,7 +40,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-            
+                                    <tr>
+                                    
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -72,6 +75,7 @@
                 </div>
             </div>
         </div>
+
         <div class="card-footer">
             {% block button_list %}
                 <a href="{{ create_url }}" class="btn btn-primary btn-flat btnTest">

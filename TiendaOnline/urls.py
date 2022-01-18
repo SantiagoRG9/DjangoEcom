@@ -26,6 +26,7 @@ from login.views import *
 from gestionpedidos.views.dashboard.views import DashboardView
 from django.conf import settings
 from django.conf.urls.static import static 
+from reports.views import ReportSaleView
 
 
 urlpatterns = [
@@ -53,10 +54,10 @@ urlpatterns = [
     path('formcli/', ClientFormView.as_view(), name='clientForm'),
 
     # SALE
-    # path('sale/', SaleListView.as_view(), name='saleList'),
+    path('sale/', SaleListView.as_view(), name='saleList'),
     path('sale2/', SaleCreateView.as_view(), name='saleCreate'),
-    # path('sale3/<int:pk>', SaleUpdateView.as_view(), name='saleUpdate'),
-    # path('sale4/<int:pk>', SaleDeleteView.as_view(), name='saleDelete'),
+    path('sale3/<int:pk>', SaleUpdateView.as_view(), name='saleUpdate'),
+    path('sale4/<int:pk>', SaleDeleteView.as_view(), name='saleDelete'),
     # path('formsale/', SaleFormView.as_view(), name='clientsale'),
 
     # HOMEPAGES
@@ -70,6 +71,12 @@ urlpatterns = [
 
     # TEST
     path('test/', TestView.as_view(), name='test'),
+
+    # PDF
+    path('pdf/<int:pk>', SaleInvoicePdfView.as_view(), name='sale_invoice_pdf'),
+
+    # REPORTS
+     path('report/', include('reports.url')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

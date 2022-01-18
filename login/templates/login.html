@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="{% static '/img/anarquia.ico' %}" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OneA | {{ title }}</title>
 
@@ -22,12 +23,12 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{% url 'homepage' %}"><b>Admin</b>LTE</a>
+    <a href="{% url 'homepage' %}"><b>Login</b>OneA</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Ingresa para empezar la sesion</p>
 
       <form action="." method="post">
         <input type="hidden" name="next" value="{{ next }}">

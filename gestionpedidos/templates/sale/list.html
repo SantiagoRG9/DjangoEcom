@@ -1,0 +1,37 @@
+{% extends 'list.html' %}
+
+{% block columns %}
+    <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Subtotal</th>
+        <th scope="col">IVA</th>
+        <th scope="col">Total</th>
+        <th scope="col">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+    {% for c in object_list %}
+    <tr>
+        <td>{{c.id}}</td>
+        <td>{{c.cli}}</td>
+        <td>{{c.date_joined}}</td>
+        <td>{{c.subtotal}}</td>
+        <td>{{c.iva}}</td>
+        <td>{{c.total}}</td>
+        <td>
+            <a href="{% url 'saleUpdate' c.id %}" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>
+            <a href="{% url 'saleDelete' c.id %}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
+            <a href="{% url 'sale_invoice_pdf' c.id %}" class="btn btn-info btn-xs" target="_blank" onclick="OpenWin()"><i class="fas fa-file-pdf"></i></a>
+        </td>
+    </tr>
+
+    <script>
+       function OpenWin() {
+           window.open({% url 'sale_invoice_pdf' c.id %})
+       } 
+    </script>
+    {% endfor %}
+{% endblock %}
