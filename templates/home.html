@@ -25,6 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href=" {% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css' %}">
   <link rel="stylesheet" href=" {% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}">
   <link rel="stylesheet" href=" {% static 'lib/jquery-ui-1.12.1.custom/jquery-ui.min.css' %}">
+  <link rel="stylesheet" href=" {% static 'lib/daterangepicker-3.1/daterangepicker.css' %}">
   <!-- head -->
   {% block head %}
 
@@ -54,7 +55,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="{% static 'lib/moment-2.25.3/moment.js' %}"></script>
   <script src="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}"></script>
   <script src="{% static 'lib/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
-  </head>
+  <script src="{% static 'lib/moment-2.25.3/moment.js' %}"></script>
+  <script src="{% static 'lib/daterangepicker-3.1/daterangepicker.js' %}"></script>
+
+  <script src="{% static 'sale/js/report.js' %}"></script>
+  
+  <script src="{% static 'lib/highcharts-8.1.2/highcharts.js' %}"></script>
+  <script src="{% static 'lib/highcharts-8.1.2/es-modules/modules/exporting.src.js' %}"></script>
+  <script src="{% static 'lib/highcharts-8.1.2/es-modules/modules/export-data.src.js' %}"></script>
+  <script src="{% static 'lib/highcharts-8.1.2/es-modules/modules/accessibility/accessibility.js' %}"></script>
+
+</head>
   {% block body %}
   {% endblock %}
 </html>

@@ -10,9 +10,24 @@
             </h3>
         </div>
         <br>
-        <table class="table" id="myTable">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="">Rango de fechas:</label>
+                    {{ form.date_ranger }}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <table class="table" id="">
             <thead>
                 {% block columns %}
+                <th scope="col">No.</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Subtotal</th>
+                <th scope="col">IVA</th>
+                <th scope="col">Total</th>
                 {% endblock columns %}
             </thead>
             <tbody>
@@ -23,9 +38,7 @@
         <div>
         <div class="card-footer">
             {% block button_list %}
-                <a href="{{ create_url }}" class="btn btn-primary btn-flat btnTest">
-                    <i class="fas fa-plus"></i>&nbsp; Nuevo registro
-                </a>
+ 
             {% endblock button_list %}
         </div>
         </div>

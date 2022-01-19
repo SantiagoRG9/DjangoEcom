@@ -27,6 +27,7 @@ from gestionpedidos.views.dashboard.views import DashboardView
 from django.conf import settings
 from django.conf.urls.static import static 
 from reports.views import ReportSaleView
+from user.views import UserChangePassword
 
 
 urlpatterns = [
@@ -76,7 +77,10 @@ urlpatterns = [
     path('pdf/<int:pk>', SaleInvoicePdfView.as_view(), name='sale_invoice_pdf'),
 
     # REPORTS
-     path('report/', include('reports.url')),
+    path('report/', include('reports.url')),
+
+    #CHANGEPASSWORD
+    path('change/password/', UserChangePassword.as_view(), name='user_pass'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
